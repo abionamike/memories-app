@@ -9,6 +9,16 @@ export const listMemories = async (req, res) => {
     }
 }
 
+export const getAMemory = async (req, res) => {
+    try {
+        const memory = await Memory.findById(req.params.id);
+
+        res.json(memory);
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+
 export const createMemories = async (req, res) => {
     try {
         const memory = await Memory.create(req.body);
