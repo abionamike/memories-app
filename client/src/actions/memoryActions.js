@@ -4,7 +4,6 @@ import * as actions from '../constants/memoryConstants';
 const listMemories = () => async (dispatch) => {
     try {
         dispatch({ type: actions.MEMORY_LIST_REQUEST });
-
         const { data } = await axios.get('/api/memories');
         dispatch({ type: actions.MEMORY_LIST_SUCCESS, payload: data });
 
@@ -37,16 +36,41 @@ const deleteMemory = (id) => async (dispatch) => {
     }
 }
 
-const updateMemory = (id, memory) => async (dispatch) => {
+const updateMemory = (memory) => async (dispatch) => {
     try {
         dispatch({ type: actions.MEMORY_UPDATE_REQUEST });
 
-        await axios.put(`/api/memories/${id}`, memory);
+        await axios.put(`/api/memories/update/${memory._id}`, memory);
         dispatch({ type: actions.MEMORY_UPDATE_SUCCESS });
 
+        dispatch(listMemories());
     } catch (error) {
         dispatch({ type: actions.MEMORY_UPDATE_FAIL, payload: error.message });
     }
 }
 
-export { listMemories, createMemory, deleteMemory, updateMemory };
+const fetchDataForUpdate = (memory) => (dispatch) => {
+    try {
+        dispatch({ type: actions.MEMORY_FETCH_REQUEST });
+
+        dispatch({ type: actions.MEMORY_FETCH_SUCCESS, payload: memory });
+
+    } catch (error) {
+        dispatch({ type: actions.MEMORY_FETCH_FAIL, payload: error.message });
+    }
+}
+
+const increaseLike = (like) => async (dispatch) => {
+    try {
+        dispatch({ type: actions.MEMORY_LIKE_REQUEST });
+
+        const { data } = await axios.put(`/api/memories/${like.id}`, like);
+        dispatch({ type: actions.MEMORY_LIKE_SUCCESS, payload: data });
+
+        dispatch(listMemories());
+    } catch (error) {
+        dispatch({ type: actions.MEMORY_LIKE_FAIL, payload: error.message });
+    }
+}
+
+export { listMemories, createMemory, deleteMemory, updateMemory, fetchDataForUpdate, increaseLike };

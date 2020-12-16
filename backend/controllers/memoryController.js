@@ -29,6 +29,21 @@ export const createMemories = async (req, res) => {
     }
 }
 
+export const increaseLike = async (req, res) => {
+    try {
+        const { like } = req.body;
+        const memory = await Memory.findById(req.params.id);
+
+        memory.like = like || memory.like;
+
+        const updatedMemory = await memory.save(); 
+
+        res.json(updatedMemory); //returns the saved updated memory
+    } catch (error) {
+        res.status(403).json({message: error.message});
+    }
+}
+
 export const updateMemories = async (req, res) => {
     try {
         const { creator, title, message, tags, image } = req.body;
@@ -42,7 +57,6 @@ export const updateMemories = async (req, res) => {
         memory.image = image || memory.image;
 
         const updatedMemory = await memory.save(); 
-
         res.json(updatedMemory); //returns the updated memory
     } catch (error) {
         res.status(403).json({message: error.message});
