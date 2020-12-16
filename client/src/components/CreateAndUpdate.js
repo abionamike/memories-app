@@ -4,6 +4,17 @@ import { Button, TextField } from '@material-ui/core';
 import { createMemory, listMemories, updateMemory } from '../actions/memoryActions';
 import { MEMORY_FETCH_RESET } from '../constants/memoryConstants';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const Container = styled.form`
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid red;
+    width: 250px;
+    padding: 20px;
+    margin: 15px;
+`;
 
 const CreateAndUpdate = () => {
     const dispatch = useDispatch();
@@ -72,7 +83,7 @@ const CreateAndUpdate = () => {
     }
     
     return (
-        <div className="create">
+        <Container onSubmit={handleSubmit}>
             <h3>Creating a Memory</h3>
             <TextField size="small" margin="dense" value={creator} placeholder="Creator" label="Creator" variant="outlined" onChange={e => setCreator(e.target.value)} required />
             <TextField size="small" margin="dense" value={title} placeholder="Title" label="Title" variant="outlined" onChange={e => setTitle(e.target.value)} required />
@@ -80,9 +91,9 @@ const CreateAndUpdate = () => {
             <TextField size="small" margin="dense" value={tags} placeholder="Tags (comma seperated)" label="Tags" variant="outlined" onChange={e => setTags(e.target.value)} required />
             {fileError && <p>{fileError}</p>}
             <input type="file" onChange={uploadFileHandler} />
-            <Button onClick={handleSubmit} style={{ margin: '5px 0' }} variant="contained" color="primary">submit</Button>
+            <Button type="submit" style={{ margin: '5px 0' }} variant="contained" color="primary">submit</Button>
             <Button onClick={handleClear} style={{ margin: '5px 0' }} variant="contained" color="secondary">clear</Button>
-        </div>
+        </Container>
     )
 }
 

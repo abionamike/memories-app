@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
+import { Container } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import AppBar from './components/AppBar';
 import Card from './components/Card';
@@ -7,31 +8,18 @@ import CreateAndUpdate from './components/CreateAndUpdate';
 import { listMemories } from './actions/memoryActions';
 import styled from 'styled-components';
 
-const AppContainer = styled.div`
-  width: 80%;
-  border: 1px solid red;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
 const Main = styled.div`
   display: flex;
-  border: 1px solid black;
-  background-color: lightblue;
 `;
 
 const MemoriesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 65%;
-  border: 1px solid black;
 `;
 
 const CreateContainer = styled.div`
   width: 35%;
-  border: 1px solid black;
 `;
 
 const App = () => {
@@ -44,7 +32,7 @@ const App = () => {
     dispatch(listMemories());
   }, [dispatch]);
   return (
-    <AppContainer>
+    <Container maxWidth="lg">
       <AppBar />
       <Main>
         <MemoriesContainer>
@@ -56,7 +44,7 @@ const App = () => {
           <CreateAndUpdate />
         </CreateContainer>
       </Main>
-    </AppContainer>
+    </Container>
   );
 }
 

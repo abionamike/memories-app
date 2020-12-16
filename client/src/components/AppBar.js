@@ -1,22 +1,33 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import { AppBar, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    width: '100%',
-    height: 50,
-    marginTop: 20,
-    marginBottom: 20
+  appBar: {
+    borderRadius: 15,
+    margin: '30px 0',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
+  heading: {
+    color: 'rgba(0, 183, 255, 1)',
+  },
+  image: {
+    marginLeft: '15px'
+  }
 }));
 
-const AppBar = () => {
+const NavBar = () => {
   const classes = useStyles();
 
   return (
-    <Paper className={classes.paper} elevation={3} />
+    <AppBar className={classes.appBar} position="static" color="inherit">
+      <Typography className={classes.heading} variant="h2" align="center">Memories</Typography>
+      {/* <img src={} alt="memories" height="60" /> */}
+    </AppBar>
   );
 }
 
-export default AppBar;
+export default NavBar;
