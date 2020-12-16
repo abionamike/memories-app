@@ -9,8 +9,7 @@ import styled from 'styled-components';
 const Container = styled.form`
     display: flex;
     flex-direction: column;
-    background-color: #fff;
-    border: 1px solid red;
+    background-color: #f5f5f5;
     width: 250px;
     padding: 20px;
     margin: 15px;

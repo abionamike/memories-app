@@ -7,7 +7,7 @@ import { deleteMemory, fetchDataForUpdate, increaseLike, listMemories } from '..
 import styled from 'styled-components';
 
 const Container = styled.div`
-  background-color: white;
+  background-color: #f5f5f5;
   border-radius: 20px;
   margin: 15px;
   width: 280px;
