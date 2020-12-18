@@ -25,7 +25,7 @@ const NavBar = () => {
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
-      <Typography className={classes.heading} variant="h2" align="center">Memories</Typography>
+      <Typography className={classes.heading} variant="h3" align="center">Memories</Typography>
       {/* <img src={} alt="memories" height="60" /> */}
     </AppBar>
   );

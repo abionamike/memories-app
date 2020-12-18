@@ -29,6 +29,7 @@ const Name = styled.div`
 
 const Creator = styled.h4`
   margin: 0;
+  letter-spacing: 1px;
 `;
 
 const Time = styled.p`
@@ -61,6 +62,7 @@ const Tags = styled.small`
 
 const Title = styled.h2`
   color: #444;
+  letter-spacing: 1.2px;
 `;
 
 const Message = styled.p`

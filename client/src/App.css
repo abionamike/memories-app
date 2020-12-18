@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
 html {
 	position: relative;
 	background-color: #00b7ff;
@@ -14,6 +16,10 @@ html::after {
 	background-color: black;
 	opacity: .45;
 	z-index: -1;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
 }
 
 .card .image::after {

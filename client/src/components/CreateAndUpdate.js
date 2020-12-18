@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch ,useSelector } from 'react-redux';
-import { Button, TextField } from '@material-ui/core';
+import { Button, TextField, CircularProgress } from '@material-ui/core';
 import { createMemory, listMemories, updateMemory } from '../actions/memoryActions';
 import { MEMORY_FETCH_RESET } from '../constants/memoryConstants';
 import axios from 'axios';
@@ -15,21 +15,37 @@ const Container = styled.form`
     margin: 15px;
 `;
 
+const Heading = styled.h3`
+    text-align: center;
+    color: #444;
+    font-size: 25px;
+    margin-top: 5px;
+`;
+
+const File = styled.div`
+    display: flex;
+    margin-top: 15px;
+    margin-bottom: 5px;
+`;
+
 const CreateAndUpdate = () => {
     const dispatch = useDispatch();
     const { loading, memory, error } = useSelector(state => state.memoryFetch);
 
+    const [heading, setHeading] = useState('Creating a Memory');
     const [creator, setCreator] = useState('');
     const [title, setTitle] = useState('');
     const [message, setMessage] = useState('');
     const [tags, setTags] = useState('');
     const [image, setImage] = useState('');
     const [fileError, setFileError] = useState('');
+    const [uploading, setUploading] = useState(false);
 
     const uploadFileHandler = async (e) => {
         const file = e.target.files[0];
         const formData = new FormData();
         formData.append('image', file);
+        setUploading(true);
 
         const config = {
             'Content-Type': 'multipart/form-data',
@@ -38,6 +54,7 @@ const CreateAndUpdate = () => {
         try {
             const { data } = await axios.post('/api/uploads', formData, config);
             setImage(data.filename);
+            setUploading(false);
         } catch (error) {
             setFileError(error);
         }
@@ -49,6 +66,7 @@ const CreateAndUpdate = () => {
             setTitle(memory.title);
             setMessage(memory.message);
             setTags(memory.tags);
+            setHeading('"Updating a Memory"');
         }
     }, [memory]);
 
@@ -74,6 +92,7 @@ const CreateAndUpdate = () => {
     }
 
     const handleClear = () => {
+        setHeading('Creating a Memory');
         setCreator('');
         setTitle('');
         setMessage('');
@@ -83,13 +102,16 @@ const CreateAndUpdate = () => {
     
     return (
         <Container onSubmit={handleSubmit}>
-            <h3>Creating a Memory</h3>
+            <Heading>{heading}</Heading>
             <TextField size="small" margin="dense" value={creator} placeholder="Creator" label="Creator" variant="outlined" onChange={e => setCreator(e.target.value)} required />
             <TextField size="small" margin="dense" value={title} placeholder="Title" label="Title" variant="outlined" onChange={e => setTitle(e.target.value)} required />
             <TextField rows="3" margin="dense" value={message} label="Message" placeholder="Message" multiline variant="outlined" onChange={e => setMessage(e.target.value)} required />
             <TextField size="small" margin="dense" value={tags} placeholder="Tags (comma seperated)" label="Tags" variant="outlined" onChange={e => setTags(e.target.value)} required />
             {fileError && <p>{fileError}</p>}
-            <input type="file" onChange={uploadFileHandler} />
+            <File>
+                <input type="file" onChange={uploadFileHandler} />
+                {uploading && <CircularProgress color="inherit" />}
+            </File>
             <Button type="submit" style={{ margin: '5px 0' }} variant="contained" color="primary">submit</Button>
             <Button onClick={handleClear} style={{ margin: '5px 0' }} variant="contained" color="secondary">clear</Button>
         </Container>
