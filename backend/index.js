@@ -1,5 +1,5 @@
-import path from 'path';
 import express from 'express';
+import path from 'path';
 import configDB from './config/db.js';
 import memoryRoute from './routes/memoryRoute.js';
 import imageRoute from './routes/imageRoute.js';
