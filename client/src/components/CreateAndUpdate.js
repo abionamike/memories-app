@@ -30,7 +30,7 @@ const File = styled.div`
 
 const CreateAndUpdate = () => {
     const dispatch = useDispatch();
-    const { loading, memory, error } = useSelector(state => state.memoryFetch);
+    const { memory } = useSelector(state => state.memoryFetch);
 
     const [heading, setHeading] = useState('Creating a Memory');
     const [creator, setCreator] = useState('');

@@ -10,22 +10,31 @@ import styled from 'styled-components';
 
 const Main = styled.div`
   display: flex;
+
+  @media only screen and (max-width: 800px) {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
 `;
 
 const MemoriesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 65%;
+  
 `;
 
 const CreateContainer = styled.div`
   width: 35%;
+  @media only screen and (max-width: 900px) {
+    width: 70%;
+  }
 `;
 
 const App = () => {
   const dispatch = useDispatch();
 
-  const { loading, memories, error } = useSelector(state => state.memoryList);
+  const { memories } = useSelector(state => state.memoryList);
 
   console.log(memories);
   useEffect(() => {
