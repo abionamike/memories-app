@@ -4,7 +4,7 @@ import * as actions from '../constants/memoryConstants';
 const listMemories = () => async (dispatch) => {
     try {
         dispatch({ type: actions.MEMORY_LIST_REQUEST });
-        const { data } = await axios.get('api/memories');
+        const { data } = await axios.get('/api/memories');
         dispatch({ type: actions.MEMORY_LIST_SUCCESS, payload: data });
 
     } catch (error) {
@@ -16,7 +16,7 @@ const createMemory = (memory) => async (dispatch) => {
     try {
         dispatch({ type: actions.MEMORY_CREATE_REQUEST });
 
-        await axios.post('api/memories', memory);
+        await axios.post('/api/memories', memory);
         dispatch({ type: actions.MEMORY_CREATE_SUCCESS });
 
     } catch (error) {
@@ -28,7 +28,7 @@ const deleteMemory = (id) => async (dispatch) => {
     try {
         dispatch({ type: actions.MEMORY_DELETE_REQUEST });
 
-        await axios.delete(`api/memories/${id}`);
+        await axios.delete(`/api/memories/${id}`);
         dispatch({ type: actions.MEMORY_DELETE_SUCCESS });
 
     } catch (error) {
@@ -40,7 +40,7 @@ const updateMemory = (memory) => async (dispatch) => {
     try {
         dispatch({ type: actions.MEMORY_UPDATE_REQUEST });
 
-        await axios.put(`api/memories/update/${memory._id}`, memory);
+        await axios.put(`/api/memories/update/${memory._id}`, memory);
         dispatch({ type: actions.MEMORY_UPDATE_SUCCESS });
 
         dispatch(listMemories());
@@ -64,7 +64,7 @@ const increaseLike = (like) => async (dispatch) => {
     try {
         dispatch({ type: actions.MEMORY_LIKE_REQUEST });
 
-        const { data } = await axios.put(`api/memories/${like.id}`, like);
+        const { data } = await axios.put(`/api/memories/${like.id}`, like);
         dispatch({ type: actions.MEMORY_LIKE_SUCCESS, payload: data });
 
         dispatch(listMemories());
