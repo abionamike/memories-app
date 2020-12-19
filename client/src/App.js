@@ -36,7 +36,6 @@ const App = () => {
 
   const { memories } = useSelector(state => state.memoryList);
 
-  console.log(memories);
   useEffect(() => {
     dispatch(listMemories());
   }, [dispatch]);

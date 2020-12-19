@@ -52,7 +52,7 @@ const CreateAndUpdate = () => {
         }
 
         try {
-            const { data } = await axios.post('/api/uploads', formData, config);
+            const { data } = await axios.post('https://my-memories-appx.herokuapp.com/api/uploads', formData, config);
             setImage(data.filename);
             setUploading(false);
         } catch (error) {

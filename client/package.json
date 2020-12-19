@@ -1,6 +1,5 @@
 {
   "name": "myapp",
-  "proxy": "https://my-memories-appx.herokuapp.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
