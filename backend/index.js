@@ -15,7 +15,7 @@ app.use('/api/memories', memoryRoute);
 app.use('/api/uploads', imageRoute);
 
 const __dirname = path.resolve();
-app.use('/uploads', express.static(path.join(__dirname, '/upload/images')));
+app.use('/uploads', express.static(path.join(__dirname, 'backend/upload/images')));
 
 if(process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, 'client/build')));
