@@ -5,6 +5,7 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { deleteMemory, fetchDataForUpdate, increaseLike, listMemories } from '../actions/memoryActions';
 import styled from 'styled-components';
+import moment from 'moment';
 
 const Container = styled.div`
   background-color: #f5f5f5;
@@ -104,7 +105,7 @@ const Card = ({ memory }) => {
         <ImageText>
           <Name>
             <Creator>{memory.creator}</Creator>
-            <Time>2 months ago</Time>
+            <Time>{moment(memory.createdAt).fromNow()}</Time>
           </Name>
           <Edit title="Edit">
             <MoreHorizIcon onClick={handleFetch} />
