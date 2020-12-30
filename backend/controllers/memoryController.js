@@ -2,7 +2,7 @@ import Memory from '../model/memory.js';
 
 export const listMemories = async (req, res) => {
     try {
-        const memories = await Memory.find({ createdAt: -1 });
+        const memories = await Memory.find().sort({ createdAt: -1 });
         res.json(memories); //returns all memory
     } catch (error) {
         res.status(404).json({message: error.message});
